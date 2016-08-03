@@ -1,0 +1,27 @@
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<button id="led"></button>
+
+
+<script>
+  var socket = io.connect('http://acsdt30:3000/');
+  $("#led").on('click',function(event){
+     if($("#led").html()=='LedOFF'){
+        socket.send('0');
+        $("#led").html('LedON');
+     }else{
+       socket.send('1');
+       $("#led").html('LedOFF');
+     }
+  });
+  socket.on('connect', function () {   
+    socket.on('led_status', function (msg) {
+      if(msg==1){
+        $("#led").html('LedOFF')
+      }else{
+        $("#led").html('LedON')
+      }
+    });
+  });
+</script>
