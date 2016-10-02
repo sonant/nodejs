@@ -1,5 +1,5 @@
 var sp = require('serialport');
-var io = require('socket.io').listen(3000);
+var io = require('socket.io').listen(3000); //listen port
 
 var SP = sp.SerialPort;
 
